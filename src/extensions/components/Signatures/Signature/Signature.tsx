@@ -215,6 +215,39 @@ export class Signature extends React.Component<ISignatureProps, ISignatureState>
         this.ishandlerEvent = true;
         this.isSaveRequired = true;
       }
+      else
+      {
+        let inputs = document.getElementsByClassName('sequence-number-input');
+        let lastSeq = 1;
+        for (let x = 0; x < inputs.length; x++)
+        {
+          // @ts-ignore
+          let val = inputs[x].value;
+          if(val == null || val == '') {
+            // @ts-ignore
+            inputs[x].value = 1;
+          }
+          let seqNo = parseInt(val);
+          if(x == 0) {
+            if(seqNo != 1) {
+              // @ts-ignore
+              inputs[x].value = 1;
+              seqNo = 1;
+            }
+          }
+          if(seqNo < lastSeq) {
+            // @ts-ignore
+            inputs[x].value = lastSeq;
+            seqNo = lastSeq;
+          } else if(seqNo > lastSeq+1) {
+            // @ts-ignore
+            inputs[x].value = lastSeq+1;
+            seqNo = lastSeq+1;
+          }
+
+          lastSeq = seqNo;
+        }
+      }
     }
 
   }
@@ -284,7 +317,7 @@ export class Signature extends React.Component<ISignatureProps, ISignatureState>
        {
 
          this.enforceSigningSequecne
-         && <TextField name="partySequence" value={ this.state.signingSequenceNumber } onChange={ (event) => this.changeHandler(event, 'signingSequenceNumber') }
+         && <TextField className={'sequence-number-input'} name="partySequence" value={ this.state.signingSequenceNumber } onChange={ (event) => this.changeHandler(event, 'signingSequenceNumber') }
                 onBlur={ (event) => this.changeHandlerOnBlur(event, 'signingSequenceNumber') } />
        }
       </div>
