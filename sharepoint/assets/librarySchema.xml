@@ -1,0 +1,95 @@
+<List xmlns:ows="Microsoft SharePoint"
+      Title="Library Schema"
+      Name="LibrarySchema"
+      Direction="$Resources:Direction;"
+      Url="LibrarySchema"
+      BaseType="1"
+      EnableContentTypes="TRUE"
+      VersioningEnabled="TRUE"
+      MajorVersionLimit="100"
+      EnableMinorVersions="FALSE"
+      MajorWithMinorVersionsLimit="0"
+      DisableAttachments="FALSE"
+      FolderCreation="TRUE"
+      RootWebOnly="FALSE">
+  <MetaData>
+    <Fields></Fields>
+    <ContentTypes>
+        <!-- Folder Content Type (0x0120) -->
+        <ContentTypeRef ID="0x0120" />
+        <!-- Document Content Type (0x0101) -->
+        <!--<ContentTypeRef ID="0x0101" />-->
+        <!--
+            I could not make the required fields work
+            by just specifying <ContentTypeRef ID="0x0101A33D9AD9805788419BDAAC2CCB37500F" />.
+            If ContentTypeRef used, it creates new 'Document' ContentType that inherits from SPFxDocument (0x0101A33D9AD9805788419BDAAC2CCB37500F)
+            but this removes the Required="TRUE" rule from the fields this is why I came with bellow solution.
+            See: https://msdn.microsoft.com/en-us/library/office/aa543822(v=office.14).aspx.
+        -->
+        <ContentType ID="0x010100B759B86A3A82484E9CD53DA02F357834"
+              Name="eSign Genie"
+              Group="eSign Genie Content Types"
+              Description="eSign Genie Content Type"
+              Version="0"
+              Hidden="FALSE"
+              Sealed="FALSE"
+              >
+          <FieldRefs>
+            <!--Title Site Column -->
+            <!-- <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" /> -->
+            <!-- eSignGenieAuthorEmail Site Column -->
+            <FieldRef ID="{89E26A6A-A5FA-4E2D-A51B-B5220D946531}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+            <!-- eSignGenieAuthorName Site Column -->
+            <FieldRef ID="{94FEE6F8-C470-41C4-8BB0-6891245894F4}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+            <!-- eSignGenieFolderID Site Column -->
+            <FieldRef ID="{11C0FF48-D017-463A-8A2D-929B4BE7AAFE}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+            <!-- eSignGenieFolderStatus Site Column -->
+            <FieldRef ID="{33ECEACD-B144-4197-BD3B-B0E2948DAAB3}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+            <!-- eSignGenieSignedDocsLink Site Column -->
+            <FieldRef ID="{1E7580EC-B88B-4604-A12C-FFFBFADCA54E}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+          </FieldRefs>
+          <DocumentTemplate TargetName="/_layouts/15/upload.aspx"/>
+      </ContentType>
+    </ContentTypes>
+    <Views>
+      <View BaseViewID="1"
+            Type="HTML"
+            WebPartZoneID="Main"
+            DisplayName="$Resources:core,objectiv_schema_mwsidcamlidC24;"
+            DefaultView="TRUE"
+            MobileView="TRUE"
+            MobileDefaultView="TRUE"
+            SetupPath="pages\viewpage.aspx"
+            ImageUrl="/_layouts/images/generic.png"
+            Url="Forms/AllItems.aspx"
+            ContentTypeID="0x">
+        <XslLink Default="TRUE">main.xsl</XslLink>
+        <JSLink>clienttemplates.js</JSLink>
+        <RowLimit Paged="TRUE">30</RowLimit>
+        <Toolbar Type="Standard" />
+        <Aggregations Value="Off" />
+        <ViewFields>
+          <!-- Name is the InternalName -->
+          <FieldRef Name="DocIcon" />
+          <FieldRef Name="LinkFilename"></FieldRef>
+          <!-- <FieldRef Name="Title"></FieldRef> -->
+          <FieldRef Name="eSignGenieSignedDocsLink"></FieldRef>
+          <FieldRef Name="eSignGenieFolderID"></FieldRef>
+          <FieldRef Name="eSignGenieFolderStatus"></FieldRef>
+          <FieldRef Name="eSignGenieAuthorEmail"></FieldRef>
+          <FieldRef Name="eSignGenieAuthorName"></FieldRef>
+        </ViewFields>
+        <Query>
+          <OrderBy>
+            <FieldRef Name="FileLeafRef" />
+          </OrderBy>
+        </Query>
+      </View>
+    </Views>
+    <Forms>
+      <Form Type="DisplayForm" Url="Forms/DispForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+      <Form Type="EditForm" Url="Forms/EditForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+      <Form Type="NewForm" Url="Forms/Upload.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+    </Forms>
+  </MetaData>
+</List>

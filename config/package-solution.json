@@ -1,0 +1,31 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "eSign Genie",
+    "id": "42586342-9444-4678-b98b-5c628d10716a",
+    "version": "1.0.0.1",
+    "includeClientSideAssets": true,
+    "isDomainIsolated": false,
+    "features": [
+      {
+        "title": "eSign Genie Application Extension - Deployment of custom action.",
+        "description": "Deploys a custom action with ClientSideComponentId association.",
+        "id": "f35b4f9b-5858-49de-b52d-54ff39e419c0",
+        "version": "1.0.0.0",
+        "assets": {
+          "elementManifests": [
+            "elements.xml",
+            "ClientSideInstance.xml"
+          ],
+          "elementFiles":[
+            "librarySchema.xml",
+            "eSignGenieAuthenticationPage.aspx"
+          ]
+        }
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/e-sign-ribbon-action.sppkg"
+  }
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <ClientSideComponentInstance
+        Title="ESignCommandSet"
+        Location="ClientSideExtension.ListViewCommandSet.CommandBar"
+        ListTemplateId="100"
+        Properties="{&quot;getSignatures&quot;:&quot;Sign and send doc to eSign.&quot;, &quot;checkStatus&quot;:&quot;Check doc signing status.&quot;&quot;viewDocument&quot;:&quot;View signed document.}"
+        ComponentId="6f530a7d-ab50-4f68-8106-99d1d51f4eab" />
+</Elements>

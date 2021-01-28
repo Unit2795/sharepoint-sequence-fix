@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+ <!-- List of possible elements expected:
+        'CustomAction, Field, ContentType, DocLinInstance'
+    -->
+    <!-- <CustomAction
+        Title="ESignCommandSet"
+        RegistrationId="100"
+        RegistrationType="List"
+        Location="ClientSideExtension.ListViewCommandSet.CommandBar"
+        ClientSideComponentId="6f530a7d-ab50-4f68-8106-99d1d51f4eab"
+        ClientSideComponentProperties="{&quot;getSignatures&quot;:&quot;Sign and send doc to eSign.&quot;, &quot;checkStatus&quot;:&quot;Check doc signing status.&quot;&quot;viewDocument&quot;:&quot;View signed document.}">
+    </CustomAction> -->
+
+  <!-- Upload Site Page with SPFx webpart -->
+    <Module Name="eSignGenieAuthenticationPage" Url="SitePages">
+        <File Path="eSignGenieAuthenticationPage.aspx" Url="eSignGenieAuthenticationPage.aspx" Type="GhostableInLibrary" >
+        </File>
+    </Module>
+    <!-- Site Columns -->
+    <Field ID="{89E26A6A-A5FA-4E2D-A51B-B5220D946531}"
+           Name="eSignGenieAuthorEmail"
+           DisplayName="Author Email"
+           StaticName="eSignGenieAuthorEmail"
+           Group="eSign Genie Site Columns"
+           Type="Text"
+           Required="FALSE"
+           EnforceUniqueValues="FALSE"
+           Indexed="FALSE"
+           Sortable="TRUE"
+           />
+      <Field ID="{94FEE6F8-C470-41C4-8BB0-6891245894F4}"
+           Name="eSignGenieAuthorName"
+           DisplayName="Author Name"
+           StaticName="eSignGenieAuthorName"
+           Group="eSign Genie Site Columns"
+           Type="Text"
+           Required="FALSE"
+           EnforceUniqueValues="FALSE"
+           Indexed="FALSE"
+           Sortable="TRUE"
+           />
+      <Field ID="{11C0FF48-D017-463A-8A2D-929B4BE7AAFE}"
+           Name="eSignGenieFolderID"
+           DisplayName="Folder ID"
+           StaticName="eSignGenieFolderID"
+           Group="eSign Genie Site Columns"
+           Type="Number"
+           Required="FALSE"
+           EnforceUniqueValues="FALSE"
+           Indexed="FALSE"
+           Sortable="TRUE"
+           />
+      <Field ID="{33ECEACD-B144-4197-BD3B-B0E2948DAAB3}"
+           Name="eSignGenieFolderStatus"
+           DisplayName="Folder Status"
+           StaticName="eSignGenieFolderStatus"
+           Group="eSign Genie Site Columns"
+           Type="Text"
+           Required="FALSE"
+           EnforceUniqueValues="FALSE"
+           Indexed="FALSE"
+           Sortable="TRUE"
+           />
+      <Field ID="{1E7580EC-B88B-4604-A12C-FFFBFADCA54E}"
+           Name="eSignGenieSignedDocsLink"
+           DisplayName="Signed Docs Link"
+           StaticName="eSignGenieSignedDocsLink"
+           Group="eSign Genie Site Columns"
+           Type="URL"
+           Format="Hyperlink"
+           Required="FALSE"
+           EnforceUniqueValues="FALSE"
+           Indexed="FALSE"
+           Sortable="FALSE"
+           />
+
+
+     <!-- Parent ContentType: Item (0x0100) -->
+
+     <ContentType ID="0x010100B759B86A3A82484E9CD53DA02F357834"
+        Name="eSign Genie"
+        Group="eSign Genie Content Types"
+        Description="eSign Genie Documents"
+        Inherits="TRUE"
+        Version="0"
+        Hidden="FALSE"
+        Sealed="FALSE">
+      <FieldRefs>
+            <!-- eSignGenieAuthorEmail Site Column -->
+            <FieldRef ID="{89E26A6A-A5FA-4E2D-A51B-B5220D946531}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+            <!-- eSignGenieAuthorName Site Column -->
+            <FieldRef ID="{94FEE6F8-C470-41C4-8BB0-6891245894F4}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+            <!-- eSignGenieFolderID Site Column -->
+            <FieldRef ID="{11C0FF48-D017-463A-8A2D-929B4BE7AAFE}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+            <!-- eSignGenieFolderStatus Site Column -->
+            <FieldRef ID="{33ECEACD-B144-4197-BD3B-B0E2948DAAB3}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+            <!-- eSignGenieSignedDocsLink Site Column -->
+            <FieldRef ID="{1E7580EC-B88B-4604-A12C-FFFBFADCA54E}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+      </FieldRefs>
+        <DocumentTemplate TargetName="/_layouts/15/upload.aspx"/>
+      </ContentType>
+
+
+    <!-- Document Library (TemplateType 101) -->
+
+    <ListInstance
+            CustomSchema="librarySchema.xml"
+            FeatureId="00bfea71-e717-4e80-aa17-d0c71b360101"
+            Title="eSign Genie Documents"
+            Description="Document Library with specific features to send and sign docs using eSign Genie."
+            TemplateType="101"
+            Url="eSign Genie Documents"
+            Hidden="FALSE">
+    </ListInstance>
+
+
+    <CustomAction
+        Title="ESignCommandSet"
+        RegistrationId="101"
+        RegistrationType="List"
+        Location="ClientSideExtension.ListViewCommandSet.CommandBar"
+        ClientSideComponentId="6f530a7d-ab50-4f68-8106-99d1d51f4eab"
+        ClientSideComponentProperties="{&quot;getSignatures&quot;:&quot;Sign and send doc to eSign.&quot;}">
+    </CustomAction>
+</Elements>
